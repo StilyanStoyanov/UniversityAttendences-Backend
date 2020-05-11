@@ -14,4 +14,6 @@ public interface IUserRepository extends JpaRepository<User, String> {
     Optional<User> findById(String id);
 
     void deleteById(String s);
+
+    Optional<User> findByUserNameAndPassword(String username, String password);
 }
