@@ -23,6 +23,7 @@ public class Student {
     private String fullName;
 
     @ManyToOne
+    @NonNull
     @JoinColumn(name="specialty_id", nullable = false)
     private Specialty specialty;
 

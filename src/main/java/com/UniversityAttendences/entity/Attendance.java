@@ -10,7 +10,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "attendances")
+@Table(name = "attendances", uniqueConstraints = { @UniqueConstraint(columnNames = {"student_id", "subject_id"})})
 public class Attendance {
     @Id
     @GeneratedValue(generator = "system-uuid")

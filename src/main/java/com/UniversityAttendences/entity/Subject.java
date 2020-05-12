@@ -22,6 +22,10 @@ public class Subject {
     @NonNull
     private String name;
 
+    @Column(name = "total_exercises", nullable = false)
+    @NonNull
+    private Integer exercises;
+
     @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Program> programs;
 

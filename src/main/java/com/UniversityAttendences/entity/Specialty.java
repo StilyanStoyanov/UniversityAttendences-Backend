@@ -27,6 +27,7 @@ public class Specialty {
     private Set<Student> students;
 
     @ManyToOne
+    @NonNull
     @JoinColumn(name="faculty_id", nullable=false)
     private Faculty faculty;
 
