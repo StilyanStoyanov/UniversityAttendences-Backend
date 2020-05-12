@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 public class ServiceRepository {
 
     @Autowired
-    IUserRepository userRepository;
+    IStudentRepository userRepository;
 
-    public IUserRepository getUserRepository() {
+    public IStudentRepository getUserRepository() {
         return userRepository;
     }
 
