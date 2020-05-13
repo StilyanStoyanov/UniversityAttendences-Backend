@@ -4,9 +4,9 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
-@Data
+@Getter
 @AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
@@ -26,9 +26,9 @@ public class Subject {
     @NonNull
     private Integer exercises;
 
-    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Program> programs;
+    @OneToMany(mappedBy = "subject", cascade = {CascadeType.ALL})
+    private List<Program> programs;
 
-    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Attendance> attendances;
+    @OneToMany(mappedBy = "subject", cascade = {CascadeType.ALL})
+    private List<Attendance> attendances;
 }

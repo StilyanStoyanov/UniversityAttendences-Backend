@@ -1,10 +1,15 @@
 package com.UniversityAttendences.repository;
 
 import com.UniversityAttendences.entity.Professor;
+import com.UniversityAttendences.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface IProfessorRepository extends JpaRepository<Professor, String> {
+
+    Optional<Professor> findByEmailAndPassword(String username, String password);
 
 }

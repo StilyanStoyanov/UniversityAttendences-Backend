@@ -4,9 +4,9 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
-@Data
+@Getter
 @AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
@@ -24,7 +24,7 @@ public class Specialty {
 
     @OneToMany(mappedBy="specialty",
                 cascade = CascadeType.ALL)
-    private Set<Student> students;
+    private List<Student> students;
 
     @ManyToOne
     @NonNull
@@ -32,6 +32,6 @@ public class Specialty {
     private Faculty faculty;
 
 
-    @OneToMany(mappedBy = "specialty", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Program> programs;
+    @OneToMany(mappedBy = "specialty", cascade = {CascadeType.ALL})
+    private List<Program> programs;
 }

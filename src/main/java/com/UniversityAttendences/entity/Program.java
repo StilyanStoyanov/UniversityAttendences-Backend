@@ -5,7 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
@@ -18,17 +19,17 @@ public class Program {
     private String id;
 
     @NonNull
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "professor_id")
     private Professor professor;
 
     @NonNull
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
     @NonNull
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "specialty_id")
     private Specialty specialty;
 

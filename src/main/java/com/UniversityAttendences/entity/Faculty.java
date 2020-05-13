@@ -4,7 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -24,5 +24,5 @@ public class Faculty {
 
     @OneToMany(mappedBy="faculty",
             cascade = CascadeType.ALL)
-    private Set<Specialty> specialties;
+    private List<Specialty> specialties;
 }

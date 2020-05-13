@@ -15,5 +15,5 @@ public interface IStudentRepository extends JpaRepository<Student, String> {
 
     void deleteById(String s);
 
-    Optional<Student> findByFullNameAndEgn(String username, String password);
+    Optional<Student> findByFacultyNumberAndEgn(String username, String password);
 }

@@ -1,18 +1,21 @@
 package com.UniversityAttendences.entity;
 
+import com.UniversityAttendences.entity.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
-@Data
+@Getter
 @AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "students")
-public class Student {
+@ToString
+public class Student implements IUser{
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
@@ -51,6 +54,12 @@ public class Student {
     @NonNull
     private int semester;
 
-    @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Attendance> attendances;
+    @JsonIgnore
+    @OneToMany(mappedBy = "student", cascade = {CascadeType.ALL})
+    private List<Attendance> attendances;
+
+    @Override
+    public Role getRole() {
+        return Role.STUDENT;
+    }
 }
