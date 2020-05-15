@@ -2,7 +2,6 @@ package com.UniversityAttendences.controller;
 
 import com.UniversityAttendences.dto.LoginRequestDTO;
 import com.UniversityAttendences.dto.LoginResponseDTO;
-import com.UniversityAttendences.entity.IUser;
 import com.UniversityAttendences.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
