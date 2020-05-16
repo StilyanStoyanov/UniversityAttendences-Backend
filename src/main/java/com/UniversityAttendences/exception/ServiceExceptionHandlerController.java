@@ -1,5 +1,6 @@
 package com.UniversityAttendences.exception;
 
+import com.UniversityAttendences.exception.customException.StudentNotFound;
 import com.UniversityAttendences.exception.customException.UnauthorizedException;
 import com.UniversityAttendences.utils.ErrorMessageResponse;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,12 @@ public class ServiceExceptionHandlerController extends ResponseEntityExceptionHa
     }
 
     @ExceptionHandler({UnauthorizedException.class})
-    private ResponseEntity<ErrorMessageResponse> handleSystemException (UnauthorizedException e){
+    private ResponseEntity<ErrorMessageResponse> handleUnauthorizedException (UnauthorizedException e){
         return new ResponseEntity<>(new ErrorMessageResponse(e.getMessage(),e.getHttpStatus(), e.getCause()), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler({StudentNotFound.class})
+    private ResponseEntity<ErrorMessageResponse> handleStudentNotFound (StudentNotFound e){
+        return new ResponseEntity<>(new ErrorMessageResponse(e.getMessage(),e.getHttpStatus(), e.getCause()), HttpStatus.NOT_FOUND);
     }
 }
