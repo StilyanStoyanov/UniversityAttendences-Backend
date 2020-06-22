@@ -6,7 +6,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Data
-@AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -17,12 +16,14 @@ public class Attendance {
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String id;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
+    @NonNull
     private Student student;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "subject_id", nullable = false)
+    @NonNull
     private Subject subject;
 
     @Column(name = "countOfAttendances", nullable = false)
