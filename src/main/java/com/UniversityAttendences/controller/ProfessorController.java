@@ -17,10 +17,15 @@ public class ProfessorController {
     @Autowired
     ProfessorService professorService;
 
-
     @GetMapping("/{id}")
     public ResponseEntity<ProfessorResponseDTO> gerProfessorById (@PathVariable("id") String id) throws ProfessorNotFound {
         return ResponseEntity.ok(professorService.getProfessorById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProfessorResponseDTO>> getAllProfessors
+            (@RequestParam String specialtyId, @RequestParam int semester) {
+        return ResponseEntity.ok(professorService.getAllProfessors(specialtyId, semester));
     }
 
     @GetMapping("/all")

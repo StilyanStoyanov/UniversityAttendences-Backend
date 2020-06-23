@@ -21,4 +21,6 @@ public class ProfessorResponseDTO {
 
     private Integer cabinet;
 
+    private String specialty;
+
 }

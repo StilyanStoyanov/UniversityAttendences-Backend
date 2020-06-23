@@ -1,5 +1,6 @@
 package com.UniversityAttendences.exception;
 
+import com.UniversityAttendences.exception.customException.SpecialtyNotFound;
 import com.UniversityAttendences.exception.customException.StudentNotFound;
 import com.UniversityAttendences.exception.customException.UnauthorizedException;
 import com.UniversityAttendences.utils.ErrorMessageResponse;
@@ -29,6 +30,11 @@ public class ServiceExceptionHandlerController extends ResponseEntityExceptionHa
 
     @ExceptionHandler({StudentNotFound.class})
     private ResponseEntity<ErrorMessageResponse> handleStudentNotFound (StudentNotFound e){
+        return new ResponseEntity<>(new ErrorMessageResponse(e.getMessage(),e.getHttpStatus(), e.getCause()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({SpecialtyNotFound.class})
+    private ResponseEntity<ErrorMessageResponse> handleStudentNotFound (SpecialtyNotFound e){
         return new ResponseEntity<>(new ErrorMessageResponse(e.getMessage(),e.getHttpStatus(), e.getCause()), HttpStatus.NOT_FOUND);
     }
 }
