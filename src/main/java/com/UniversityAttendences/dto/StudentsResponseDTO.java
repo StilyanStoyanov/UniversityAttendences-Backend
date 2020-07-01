@@ -21,6 +21,8 @@ public class StudentsResponseDTO {
 
     private String facultyNumber;
 
+    private String specialtyFacultyName;
+
     private String egn;
 
     private String email;
