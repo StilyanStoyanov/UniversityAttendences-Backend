@@ -1,7 +1,6 @@
 package com.UniversityAttendences.service;
 
 import com.UniversityAttendences.dto.AttendancesResponseDTO;
-import com.UniversityAttendences.dto.StudentsResponseDTO;
 import com.UniversityAttendences.entity.Attendance;
 import com.UniversityAttendences.entity.Student;
 import com.UniversityAttendences.exception.customException.StudentNotFound;
@@ -11,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @Service
 public class AttendanceService {
 
+    public static final String EXERCISE = "Упражнение ";
     @Autowired
     ServiceRepository serviceRepository;
 
@@ -29,11 +31,25 @@ public class AttendanceService {
         List<Attendance> attendances = serviceRepository.getAttendanceRepository().
                 findAllByStudentIdAndSemester(student.getId(), semester);
 
-        List<AttendancesResponseDTO> attendancesResponseDTO = attendances.stream()
-                        .map(attendance -> modelMapper.map(attendance, AttendancesResponseDTO.class))
-                        .collect(Collectors.toList());
+        List<AttendancesResponseDTO> attendancesResponseDTOs = attendances.stream()
+            .map(attendance -> {
+                AttendancesResponseDTO attendancesResponseDTO = modelMapper
+                        .map(attendance, AttendancesResponseDTO.class);
+                attendancesResponseDTO.setAttendances(buildAttendancesMap(attendance.getCountOfAttendances()));
+                attendancesResponseDTO.setHidden(true);
+                return attendancesResponseDTO;
+            })
+            .collect(Collectors.toList());
 
-        return attendancesResponseDTO;
+        return attendancesResponseDTOs;
+    }
+
+    private Map<Integer, Object> buildAttendancesMap(String countOfAttendances){
+        Map<Integer, Object> attendances = new TreeMap<>();
+        for (int i = 0; i < countOfAttendances.length(); i++) {
+            attendances.put((i+1), countOfAttendances.charAt(i) == '0' ? "NO" : "YES");
+        }
+        return attendances;
     }
 
 }
