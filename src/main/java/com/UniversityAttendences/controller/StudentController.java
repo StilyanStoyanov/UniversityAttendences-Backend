@@ -25,7 +25,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentsResponseDTO> gerStudentById (@PathVariable("id") String id) throws StudentNotFound {
+    public ResponseEntity<StudentsResponseDTO> getStudentById (@PathVariable("id") String id) throws StudentNotFound {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
 
@@ -38,6 +38,14 @@ public class StudentController {
     public ResponseEntity deleteStudentById (@PathVariable("id") String id) throws Exception {
         studentService.deleteStudentById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/group")
+    public ResponseEntity<List<Integer>> getGroupBySpecialtyId (
+            @RequestParam("specialtyId") String id,
+            @RequestParam(value = "semester") int semester)
+        throws StudentNotFound {
+        return ResponseEntity.ok(studentService.getAllStudentsGroupBySpecialtyId(id, semester));
     }
 
 }

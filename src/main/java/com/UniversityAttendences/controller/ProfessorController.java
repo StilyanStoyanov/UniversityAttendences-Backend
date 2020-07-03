@@ -40,7 +40,7 @@ public class ProfessorController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/program/{id}")
+    @GetMapping("/{id}/program")
     public ResponseEntity<List<ProgramResponseDTO>> gerProfessorsProgramById (
             @PathVariable("id") String id,
             @RequestParam(required = false) String specialtyId,

@@ -71,19 +71,20 @@ public class ProfessorService {
 
         List<Program> programs;
 
-        if(specialtyId == null && semester == 0){
+        if((specialtyId == null || specialtyId.isEmpty()) && semester == 0){
             programs = serviceRepository.getProgramRepository()
-                    .findAllByProfessorId(id);
+                    .findAllByProfessorIdOrderBySemester(id);
         }
-        else if(specialtyId == null && semester > 0){
+        else if((specialtyId == null || specialtyId.isEmpty())&& semester > 0){
             programs = serviceRepository.getProgramRepository()
                     .findAllByProfessorIdAndSemester(id, semester);
-        } else if(specialtyId != null && semester == 0){
+        } else if((specialtyId == null || !specialtyId.isEmpty()) && semester == 0){
             programs = serviceRepository.getProgramRepository()
                     .findAllByProfessorIdAndSpecialtyId(id, specialtyId);
         } else {
             programs = serviceRepository.getProgramRepository()
-                    .findAllByProfessorIdAndSpecialtyIdAndSemester(id, specialtyId, semester);
+                    .findAllByProfessorIdAndSpecialtyIdAndSemesterOrderBySemester(id,
+                            specialtyId, semester);
         }
 
         if(programs == null || programs.isEmpty()){

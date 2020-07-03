@@ -17,6 +17,8 @@ public class ProgramResponseDTO {
 
     private String specialtyName;
 
+    private String specialtyId;
+
     private String subjectName;
 
     private int semester;

@@ -11,12 +11,13 @@ public interface IProgramRepository extends JpaRepository<Program, String> {
 
     List<Program> findAllBySpecialtyIdAndSemester(String specialtyId, int semester);
 
-    List<Program> findAllByProfessorIdAndSpecialtyIdAndSemester(String professorId, String specialtyId, int semester);
+    List<Program> findAllByProfessorIdAndSpecialtyIdAndSemesterOrderBySemester
+            (String professorId, String specialtyId, int semester);
 
     List<Program> findAllByProfessorIdAndSpecialtyId(String professorId, String specialtyId);
 
     List<Program> findAllByProfessorIdAndSemester(String professorId, int semester);
 
-    List<Program> findAllByProfessorId(String professorId);
+    List<Program> findAllByProfessorIdOrderBySemester(String professorId);
 
 }
