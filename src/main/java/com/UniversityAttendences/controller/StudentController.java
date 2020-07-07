@@ -48,4 +48,13 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getAllStudentsGroupBySpecialtyId(id, semester));
     }
 
+    @GetMapping("/all/filter")
+    public ResponseEntity<List<StudentsResponseDTO>> getAllByGroupSemesterAndSpecialty (
+            @RequestParam("specialtyId") String id,
+            @RequestParam(value = "semester") int semester,
+            @RequestParam(value = "group") int group)
+            throws StudentNotFound {
+        return ResponseEntity.ok(studentService.getAllStudentsBySpecialtyIdSemesterAndGroup(id, group, semester));
+    }
+
 }

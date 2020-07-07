@@ -52,4 +52,12 @@ public class StudentService {
 
         return groups;
     }
+
+    public List<StudentsResponseDTO> getAllStudentsBySpecialtyIdSemesterAndGroup(String specialtyId, int group, int semester){
+        Specialty specialty = serviceRepository.getSpecialtyRepository().findById(specialtyId)
+                .orElseThrow(() -> new SpecialtyNotFound(SPECIALTY_NOT_FOUND));
+        List<Student> students = serviceRepository.getStudentRepository()
+                .findAllBySpecialtyIdAndStudentGroupAndSemester(specialty.getId(), group, semester);
+        return students.stream().map(student -> modelMapper.map(student, StudentsResponseDTO.class)).collect(Collectors.toList());
+    }
 }
