@@ -22,4 +22,12 @@ public class AttendanceController {
         return ResponseEntity.ok(attendanceService.getAttendances(studentId, semester));
     }
 
+    @GetMapping("/filter")
+    public ResponseEntity<AttendancesResponseDTO> getAttendancesBySubject
+            (@RequestParam String studentId,
+             @RequestParam int semester,
+             @RequestParam String subjectId) {
+        return ResponseEntity.ok(attendanceService.getAttendancesBySubject(studentId, semester, subjectId));
+    }
+
 }

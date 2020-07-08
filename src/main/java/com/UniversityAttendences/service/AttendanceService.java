@@ -44,6 +44,21 @@ public class AttendanceService {
         return attendancesResponseDTOs;
     }
 
+    public AttendancesResponseDTO getAttendancesBySubject (String studentId, int semester, String subjectId)
+            throws StudentNotFound {
+        Student student = serviceRepository.getStudentRepository().findById(studentId).
+                orElseThrow(()-> new StudentNotFound(StudentService.STUDENT_NOT_FOUND));
+
+        Attendance attendance = serviceRepository.getAttendanceRepository().
+                findByStudentIdAndSemesterAndSubjectId(student.getId(), semester, subjectId);
+
+        AttendancesResponseDTO attendancesResponseDTO = modelMapper.map(attendance, AttendancesResponseDTO.class);
+        attendancesResponseDTO.setAttendances(buildAttendancesMap(attendance.getCountOfAttendances()));
+        attendancesResponseDTO.setHidden(true);
+
+        return attendancesResponseDTO;
+    }
+
     private Map<Integer, Object> buildAttendancesMap(String countOfAttendances){
         Map<Integer, Object> attendances = new TreeMap<>();
         for (int i = 0; i < countOfAttendances.length(); i++) {

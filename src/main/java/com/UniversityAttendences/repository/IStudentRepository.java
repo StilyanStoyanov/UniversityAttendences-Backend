@@ -17,5 +17,5 @@ public interface IStudentRepository extends JpaRepository<Student, String> {
     @Query(value = "SELECT * FROM students where specialty_id = :specialty and semester = :semester GROUP BY student_group", nativeQuery = true)
     List<Student> findAllBySpecialtyId(@Param("specialty") String specialtyId, @Param("semester") int semester);
 
-    List<Student> findAllBySpecialtyIdAndStudentGroupAndSemester(String specialtyId, int group, int semester);
+    List<Student> findAllBySpecialtyIdAndStudentGroupAndSemesterOrderByFullNameAsc(String specialtyId, int group, int semester);
 }

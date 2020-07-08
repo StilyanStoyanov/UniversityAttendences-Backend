@@ -10,4 +10,7 @@ import java.util.List;
 public interface IAttendanceRepository extends JpaRepository<Attendance, String> {
 
     List<Attendance> findAllByStudentIdAndSemester(String studentId, int semester);
+
+    Attendance findByStudentIdAndSemesterAndSubjectId(String studentId, int semester, String subjectId);
+
 }
