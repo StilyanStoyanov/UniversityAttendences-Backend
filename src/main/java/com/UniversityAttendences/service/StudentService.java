@@ -1,5 +1,5 @@
 package com.UniversityAttendences.service;
-import com.UniversityAttendences.dto.StudentsResponseDTO;
+import com.UniversityAttendences.dto.StudentResponseDTO;
 import com.UniversityAttendences.entity.Specialty;
 import com.UniversityAttendences.entity.Student;
 import com.UniversityAttendences.exception.customException.SpecialtyNotFound;
@@ -23,18 +23,18 @@ public class StudentService {
     @Autowired
     ModelMapper modelMapper;
 
-    public StudentsResponseDTO getStudentById(String id) throws StudentNotFound{
+    public StudentResponseDTO getStudentById(String id) throws StudentNotFound{
         Student student = serviceRepository.getStudentRepository().findById(id).orElseThrow(()-> new StudentNotFound(STUDENT_NOT_FOUND));
-        return modelMapper.map(student, StudentsResponseDTO.class);
+        return modelMapper.map(student, StudentResponseDTO.class);
     }
 
-    public List<StudentsResponseDTO> getAllStudents(){
+    public List<StudentResponseDTO> getAllStudents(){
         List<Student> students = serviceRepository.getStudentRepository().findAll();
-        return students.stream().map(student -> modelMapper.map(student, StudentsResponseDTO.class)).collect(Collectors.toList());
+        return students.stream().map(student -> modelMapper.map(student, StudentResponseDTO.class)).collect(Collectors.toList());
     }
 
     public void deleteStudentById(String id) throws Exception{
-        StudentsResponseDTO user = getStudentById(id);
+        StudentResponseDTO user = getStudentById(id);
         serviceRepository.getStudentRepository().deleteById(user.getId());
     }
 
@@ -53,11 +53,11 @@ public class StudentService {
         return groups;
     }
 
-    public List<StudentsResponseDTO> getAllStudentsBySpecialtyIdSemesterAndGroup(String specialtyId, int group, int semester){
+    public List<StudentResponseDTO> getAllStudentsBySpecialtyIdSemesterAndGroup(String specialtyId, int group, int semester){
         Specialty specialty = serviceRepository.getSpecialtyRepository().findById(specialtyId)
                 .orElseThrow(() -> new SpecialtyNotFound(SPECIALTY_NOT_FOUND));
         List<Student> students = serviceRepository.getStudentRepository()
-                .findAllBySpecialtyIdAndStudentGroupAndSemester(specialty.getId(), group, semester);
-        return students.stream().map(student -> modelMapper.map(student, StudentsResponseDTO.class)).collect(Collectors.toList());
+                .findAllBySpecialtyIdAndStudentGroupAndSemesterOrderByFullNameAsc(specialty.getId(), group, semester);
+        return students.stream().map(student -> modelMapper.map(student, StudentResponseDTO.class)).collect(Collectors.toList());
     }
 }

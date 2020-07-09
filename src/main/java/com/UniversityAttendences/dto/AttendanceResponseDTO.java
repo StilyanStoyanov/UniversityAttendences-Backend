@@ -9,7 +9,7 @@ import java.util.Map;
 @NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AttendancesResponseDTO {
+public class AttendanceResponseDTO {
 
     private String id;
 

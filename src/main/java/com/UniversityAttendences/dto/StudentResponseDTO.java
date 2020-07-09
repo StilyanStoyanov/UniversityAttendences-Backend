@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class StudentsResponseDTO {
+public class StudentResponseDTO {
 
     private String id;
 

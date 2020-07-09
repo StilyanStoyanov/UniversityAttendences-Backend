@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/professor")
@@ -24,7 +25,7 @@ public class ProfessorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProfessorResponseDTO>> getAllProfessors
+    public ResponseEntity<Set<ProfessorResponseDTO>> getAllProfessors
             (@RequestParam String specialtyId, @RequestParam int semester) {
         return ResponseEntity.ok(professorService.getAllProfessors(specialtyId, semester));
     }

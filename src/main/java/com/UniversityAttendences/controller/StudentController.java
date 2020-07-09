@@ -1,10 +1,7 @@
 package com.UniversityAttendences.controller;
 
-import com.UniversityAttendences.dto.StudentsResponseDTO;
-import com.UniversityAttendences.entity.Specialty;
-import com.UniversityAttendences.entity.Student;
+import com.UniversityAttendences.dto.StudentResponseDTO;
 import com.UniversityAttendences.exception.customException.StudentNotFound;
-import com.UniversityAttendences.repository.ServiceRepository;
 import com.UniversityAttendences.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +22,12 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentsResponseDTO> getStudentById (@PathVariable("id") String id) throws StudentNotFound {
+    public ResponseEntity<StudentResponseDTO> getStudentById (@PathVariable("id") String id) throws StudentNotFound {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<StudentsResponseDTO>> getAllStudents (){
+    public ResponseEntity<List<StudentResponseDTO>> getAllStudents (){
         return ResponseEntity.ok(studentService.getAllStudents());
     }
 
@@ -49,7 +46,7 @@ public class StudentController {
     }
 
     @GetMapping("/all/filter")
-    public ResponseEntity<List<StudentsResponseDTO>> getAllByGroupSemesterAndSpecialty (
+    public ResponseEntity<List<StudentResponseDTO>> getAllByGroupSemesterAndSpecialty (
             @RequestParam("specialtyId") String id,
             @RequestParam(value = "semester") int semester,
             @RequestParam(value = "group") int group)

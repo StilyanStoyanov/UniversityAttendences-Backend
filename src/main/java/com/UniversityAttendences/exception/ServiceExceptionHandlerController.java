@@ -1,5 +1,6 @@
 package com.UniversityAttendences.exception;
 
+import com.UniversityAttendences.entity.Attendance;
 import com.UniversityAttendences.exception.customException.*;
 import com.UniversityAttendences.utils.ErrorMessageResponse;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,11 @@ public class ServiceExceptionHandlerController extends ResponseEntityExceptionHa
 
     @ExceptionHandler({SubjectNotFound.class})
     private ResponseEntity<ErrorMessageResponse> handleSubjectNotFound (SubjectNotFound e){
+        return new ResponseEntity<>(new ErrorMessageResponse(e.getMessage(),e.getHttpStatus(), e.getCause()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({AttendanceNotFound.class})
+    private ResponseEntity<ErrorMessageResponse> handleAttendanceNotFound (AttendanceNotFound e){
         return new ResponseEntity<>(new ErrorMessageResponse(e.getMessage(),e.getHttpStatus(), e.getCause()), HttpStatus.NOT_FOUND);
     }
 }

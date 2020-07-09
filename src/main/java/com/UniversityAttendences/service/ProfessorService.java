@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,20 +35,20 @@ public class ProfessorService {
     }
 
     public List<ProfessorResponseDTO> getAllProfessors(){
-        List<Professor> professors = serviceRepository.getProfessorRepository().findAll();
+        List<Professor> professors = serviceRepository.getProfessorRepository().findAllByOrderByFullNameAsc();
         return professors.stream()
                 .map(professor -> modelMapper.map(professor, ProfessorResponseDTO.class))
                 .collect(Collectors.toList());
     }
 
-    public List<ProfessorResponseDTO> getAllProfessors(String specialtyId, int semester){
+    public Set<ProfessorResponseDTO> getAllProfessors(String specialtyId, int semester){
         Specialty specialty = serviceRepository.getSpecialtyRepository()
                 .findById(specialtyId).orElseThrow(()-> new SpecialtyNotFound(SPECIALTY_NOT_FOUND));
 
         List<Program> programs = serviceRepository.getProgramRepository()
                 .findAllBySpecialtyIdAndSemester(specialty.getId(), semester);
 
-        List<ProfessorResponseDTO> professors = programs.stream()
+        Set<ProfessorResponseDTO> professors = programs.stream()
                 .map(program -> {
                     ProfessorResponseDTO professorResponseDTO =
                             modelMapper.map(program.getProfessor(), ProfessorResponseDTO.class);
@@ -55,7 +56,7 @@ public class ProfessorService {
 
                     return professorResponseDTO;
                 })
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
         return professors;
     }
