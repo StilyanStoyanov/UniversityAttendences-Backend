@@ -62,4 +62,14 @@ public class Student implements IUser{
     public Role getRole() {
         return Role.STUDENT;
     }
+
+    @Override
+    public String getUsername() {
+        return this.facultyNumber;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.egn;
+    }
 }

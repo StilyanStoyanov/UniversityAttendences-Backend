@@ -89,7 +89,7 @@ public class ProfessorService {
         }
 
         if(programs == null || programs.isEmpty()){
-            throw new ProgramNotFound("Program not found for professor: " + professor.getFullName());
+            throw new ProgramNotFound("Програма с този филтър не е открита за преподавател с име: " + professor.getFullName());
         }
 
         List<ProgramResponseDTO> professorProgram = programs.stream()

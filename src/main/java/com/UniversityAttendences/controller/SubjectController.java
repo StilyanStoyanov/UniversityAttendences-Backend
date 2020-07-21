@@ -5,6 +5,7 @@ import com.UniversityAttendences.exception.customException.StudentNotFound;
 import com.UniversityAttendences.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class SubjectController {
     @Autowired
     SubjectService subjectService;
 
+    @PreAuthorize("hasRole('PROFESSOR')")
     @GetMapping("/{id}")
     public ResponseEntity<SubjectResponseDTO> getStudentById (@PathVariable("id") String id) throws StudentNotFound {
         return ResponseEntity.ok(subjectService.getSubjectById(id));

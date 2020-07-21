@@ -22,3 +22,8 @@ spring:
 
 logging:
   config: classpath:log4j2.yml
+
+jwt:
+  secret: tuSecretKey
+  token:
+    validity: 3600000

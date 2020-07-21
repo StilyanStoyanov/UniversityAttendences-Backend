@@ -48,4 +48,14 @@ public class Professor implements IUser {
     public Role getRole() {
         return Role.PROFESSOR;
     }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
 }

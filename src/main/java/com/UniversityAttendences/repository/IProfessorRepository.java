@@ -12,6 +12,8 @@ public interface IProfessorRepository extends JpaRepository<Professor, String> {
 
     Optional<Professor> findByEmailAndPassword(String username, String password);
 
+    Optional<Professor> findByEmail(String username);
+
     List<Professor> findAllByOrderByFullNameAsc();
 
 }

@@ -22,5 +22,6 @@ public class LoginResponseDTO {
     private Integer semester;
     private Integer stream;
     private Integer group;
+    private String token;
 
 }
