@@ -6,6 +6,7 @@ plugins {
 
 group = 'com.finalProject'
 version = '0.0.1-SNAPSHOT'
+archivesBaseName = 'university-project'
 
 configurations {
 	all*.exclude module : 'spring-boot-starter-logging'
@@ -26,7 +27,6 @@ dependencies {
 	compile group: 'org.json', name: 'json', version: '20180813'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.7'
-	compile group: 'org.flywaydb', name: 'flyway-core', version: '6.4.1'
 	runtimeOnly 'mysql:mysql-connector-java'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -39,4 +39,10 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+jar {
+	manifest {
+		attributes 'UniversityAttendancesApplication': 'com.UniversityAttendences.UniversityAttendancesApplication'
+	}
 }

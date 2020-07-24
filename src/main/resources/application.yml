@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/university_system
-    username: root
-    password: admin
+    url: jdbc:mysql://univeristy-db.mysql.database.azure.com:3306/university_system?useSSL=true&requireSSL=false&serverTimezone=UTC
+    username: uniAppAdmin@univeristy-db
+    password:  ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
@@ -14,11 +14,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-  flyway:
-    enabled: true
-    url: jdbc:mysql://localhost:3306/university_system
-    username: root
-    password: admin
 
 logging:
   config: classpath:log4j2.yml
@@ -26,4 +21,4 @@ logging:
 jwt:
   secret: tuSecretKey
   token:
-    validity: 3600000
+    validity: {TOKEN_VALIDITY}
